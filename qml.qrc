@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>nebula/nebula01.png</file>
+        <file>nebula/nebula02.png</file>
+        <file>nebula/nebula03.png</file>
+        <file>nebula/nebula04.png</file>
+        <file>nebula/nebula05.png</file>
+        <file>nebula/nebula06.png</file>
+        <file>nebula/nebula07.png</file>
+        <file>nebula/nebula09.png</file>
+        <file>nebula/nebula10.png</file>
+        <file>nebula/stars.png</file>
+    </qresource>
+</RCC>
