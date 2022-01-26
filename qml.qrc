@@ -11,5 +11,79 @@
         <file>nebula/nebula09.png</file>
         <file>nebula/nebula10.png</file>
         <file>nebula/stars.png</file>
+        <file>heart.png</file>
+        <file>heart.svg</file>
+        <file>Missile.svg</file>
+        <file>GameView.qml</file>
+        <file>objectPool.js</file>
+        <file>UFOEnemy.qml</file>
+        <file>sounds/explosion1.wav</file>
+        <file>sounds/explosion2.wav</file>
+        <file>sounds/explosion3.wav</file>
+        <file>sounds/explosion4.wav</file>
+        <file>sounds/explosion5.wav</file>
+        <file>sounds/explosion6.wav</file>
+        <file>sounds/gameover1.wav</file>
+        <file>sounds/gameover2.wav</file>
+        <file>sounds/hit1.wav</file>
+        <file>sounds/hit2.wav</file>
+        <file>sounds/hit3.wav</file>
+        <file>sounds/hit4.wav</file>
+        <file>sounds/shoot1.wav</file>
+        <file>sounds/shoot2.wav</file>
+        <file>sounds/shoot3.wav</file>
+        <file>sounds/shoot4.wav</file>
+        <file>sounds/shoot5.wav</file>
+        <file>sounds/shoot6.wav</file>
+        <file>sounds/ufo1.wav</file>
+        <file>sounds/ufo2.wav</file>
+        <file>sounds/ufo3.wav</file>
+        <file>UFO.png</file>
+        <file>PlayerView.qml</file>
+        <file>ships/Flame_01.svg</file>
+        <file>ships/Flame_02.svg</file>
+        <file>ships/Spaceships/01/Spaceship_01_BLUE.svg</file>
+        <file>ships/Spaceships/01/Spaceship_01_GREEN.svg</file>
+        <file>ships/Spaceships/01/Spaceship_01_NAVY BLUE.svg</file>
+        <file>ships/Spaceships/01/Spaceship_01_ORANGE.svg</file>
+        <file>ships/Spaceships/01/Spaceship_01_PURPLE.svg</file>
+        <file>ships/Spaceships/01/Spaceship_01_RED.svg</file>
+        <file>ships/Spaceships/01/Spaceship_01_YELLOW.svg</file>
+        <file>ships/Spaceships/02/Spaceship_02_BLUE.svg</file>
+        <file>ships/Spaceships/02/Spaceship_02_GREEN.svg</file>
+        <file>ships/Spaceships/02/Spaceship_02_NAVY BLUE.svg</file>
+        <file>ships/Spaceships/02/Spaceship_02_ORANGE.svg</file>
+        <file>ships/Spaceships/02/Spaceship_02_PURPLE.svg</file>
+        <file>ships/Spaceships/02/Spaceship_02_RED.svg</file>
+        <file>ships/Spaceships/02/Spaceship_02_YELLOW.svg</file>
+        <file>ships/Spaceships/03/Spaceship_03_BLUE.svg</file>
+        <file>ships/Spaceships/03/Spaceship_03_GREEN.svg</file>
+        <file>ships/Spaceships/03/Spaceship_03_NAVY BLUE.svg</file>
+        <file>ships/Spaceships/03/Spaceship_03_ORANGE.svg</file>
+        <file>ships/Spaceships/03/Spaceship_03_PURPLE.svg</file>
+        <file>ships/Spaceships/03/Spaceship_03_RED.svg</file>
+        <file>ships/Spaceships/03/Spaceship_03_YELLOW.svg</file>
+        <file>ships/Spaceships/04/Spaceship_04_BLUE.svg</file>
+        <file>ships/Spaceships/04/Spaceship_04_GREEN.svg</file>
+        <file>ships/Spaceships/04/Spaceship_04_NAVY BLUE.svg</file>
+        <file>ships/Spaceships/04/Spaceship_04_ORANGE.svg</file>
+        <file>ships/Spaceships/04/Spaceship_04_PURPLE.svg</file>
+        <file>ships/Spaceships/04/Spaceship_04_RED.svg</file>
+        <file>ships/Spaceships/04/Spaceship_04_YELLOW.svg</file>
+        <file>ships/Spaceships/05/Spaceship_05_BLUE.svg</file>
+        <file>ships/Spaceships/05/Spaceship_05_GREEN.svg</file>
+        <file>ships/Spaceships/05/Spaceship_05_NAVY BLUE.svg</file>
+        <file>ships/Spaceships/05/Spaceship_05_ORANGE.svg</file>
+        <file>ships/Spaceships/05/Spaceship_05_PURPLE.svg</file>
+        <file>ships/Spaceships/05/Spaceship_05_RED.svg</file>
+        <file>ships/Spaceships/05/Spaceship_05_YELLOW.svg</file>
+        <file>ships/Spaceships/06/Spaceship_06_BLUE.svg</file>
+        <file>ships/Spaceships/06/Spaceship_06_GREEN.svg</file>
+        <file>ships/Spaceships/06/Spaceship_06_NAVY BLUE.svg</file>
+        <file>ships/Spaceships/06/Spaceship_06_ORANGE.svg</file>
+        <file>ships/Spaceships/06/Spaceship_06_PURPLE.svg</file>
+        <file>ships/Spaceships/06/Spaceship_06_RED.svg</file>
+        <file>ships/Spaceships/06/Spaceship_06_YELLOW.svg</file>
+        <file>gameManager.js</file>
     </qresource>
 </RCC>

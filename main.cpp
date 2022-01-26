@@ -1,7 +1,11 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QScopedPointer>
 
-#include "gameboard.h"
+#include "inputsystem.h"
+#include "player.h"
+
+//#include "gameboard.h"
 
 
 int main(int argc, char *argv[])
@@ -14,7 +18,10 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    qmlRegisterType<GameBoard>("QtInvaders", 1, 0, "GameBoard");
+    QScopedPointer inputManager(new InputSystem);
+    qmlRegisterSingletonInstance("QtInvaders.Input", 1, 0, "Input", inputManager.get());
+    qmlRegisterType<Player>("QtInvaders", 1, 0, "Player");
+    //qmlRegisterType<GameBoard>("QtInvaders", 1, 0, "GameBoard");
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

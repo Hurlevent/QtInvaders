@@ -17,6 +17,9 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
 set(PROJECT_SOURCES
         main.cpp
         gameboard.cpp
+        gameobject.cpp
+        inputsystem.cpp
+        player.cpp
         qml.qrc
 )
 
