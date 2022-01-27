@@ -63,10 +63,10 @@ QtObject {
             x += 1
         }
         if (moveBackward){
-            y -= 1
+            y += 1
         }
         if (moveForward){
-            y += 1
+            y -= 1
         }
 
         if (x === 0 && y === 0)

@@ -9,13 +9,11 @@ Image {
 
     property real movementSpeed: 20
 
-    function update(input, area){
+    function update(input, board){
         let vec = input.pollVector()
 
-        let newX = Math.max(0, Math.min(root.x + vec.x * movementSpeed, area.x))
-        let newY = Math.max(0, Math.min(root.y + vec.y * movementSpeed, area.y))
-
-        console.log("newX: " + newX + " newY: " + newY)
+        let newX = Math.max(0, Math.min(root.x + vec.x * movementSpeed, board.width - root.width))
+        let newY = Math.max(0, Math.min(root.y + vec.y * movementSpeed, board.height - root.width))
 
         root.x = newX
         root.y = newY
