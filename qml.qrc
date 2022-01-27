@@ -12,6 +12,12 @@
         <file>sounds/hit2.wav</file>
         <file>sounds/hit3.wav</file>
         <file>sounds/hit4.wav</file>
+        <file>sounds/level-end.wav</file>
+        <file>sounds/level-start.wav</file>
+        <file>sounds/note-e.wav</file>
+        <file>sounds/note-f#.wav</file>
+        <file>sounds/note-f.wav</file>
+        <file>sounds/note-g.wav</file>
         <file>sounds/shoot1.wav</file>
         <file>sounds/shoot2.wav</file>
         <file>sounds/shoot3.wav</file>
