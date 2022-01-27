@@ -19,7 +19,7 @@ Window {
     property int score: 0
     property variant playerProjectiles: []
     property variant enemies: []
-    property bool enemiesMovingRight: true
+    property real enemySpeed: 0.01
 
     function intersecting(rect1, rect2) {
         return (rect1.x < rect2.x + rect2.width &&
@@ -130,30 +130,40 @@ Window {
 
             // update enemy movement
 
-            var canMove = function(right){
+            var canMove = function(distance){
                 let furthestNextPos = gameboard.width / 2
                 for(let enemyIt = 0; enemyIt < enemies.length; enemyIt++){
                     let enemy = enemies[enemyIt]
-                    let movementLength = enemy.width + (enemySpacing * gameboard.width / 2)
-
-                    if((right && enemy.x + movementLength > furthestNextPos) || (!right && enemy.x - movementLength < furthestNextPos)) {
-                        furthestNextPos = right ? enemy.x + movementLength : enemy.x - movementLength
+                    let nextPos = enemy.x + distance
+                    if (distance > 0){
+                        furthestNextPos = Math.max(furthestNextPos, nextPos + enemy.width)
+                    } else if (distance < 0){
+                        furthestNextPos = Math.min(furthestNextPos, nextPos)
                     }
                 }
 
-                return right ? furthestNextPos < gameboard.width : furthestNextPos >= gameboard.width
+                if (distance > 0){
+                    return furthestNextPos < gameboard.width
+                } else if (distance < 0){
+                    return furthestNextPos >= gameboard.width
+                }
+                return true
             }
 
+            let movementLength = enemySpeed * gameboard.width
 
-            if (canMove(enemiesMovingRight)){
+            console.log("movementLen: " + movementLength)
+
+            if (canMove(movementLength)) {
                 for(let enemyIt = 0; enemyIt < enemies.length; enemyIt++){
                     let enemy = enemies[enemyIt]
-                    let movementLength = enemy.width + (enemySpacing * gameboard.width / 2)
+                    //let movementLength = enemy.width + (enemySpacing * gameboard.width / 2)
 
-                    enemy.x = enemiesMovingRight ? enemy.x + movementLength : enemy.x - movementLength
+                    enemy.x = enemy.x + movementLength
                 }
             } else {
-                enemiesMovingRight = !enemiesMovingRight
+                enemySpeed = -enemySpeed
+                //console.log("enemySpeed now: " + enemySpeed)
             }
         }
     }
