@@ -35,5 +35,6 @@
         <file>images/UFO.png</file>
         <file>images/stars.png</file>
         <file>qml/PlayerProjectile.qml</file>
+        <file>qml/SoundEffects.qml</file>
     </qresource>
 </RCC>
