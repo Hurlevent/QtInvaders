@@ -11,7 +11,6 @@ Image {
     property real movementSpeed: 3
     property bool canShoot: true
 
-    signal died()
     signal shootLaser()
 
     function update(input, board){
@@ -32,15 +31,6 @@ Image {
         }
         else {
             canShoot = true
-        }
-    }
-
-    function onCollision(other) {
-        switch(other.objectType) {
-        case "enemy":
-        case "enemyProjectile":
-            died();
-            break;
         }
     }
 }
