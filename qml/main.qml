@@ -17,6 +17,7 @@ Window {
 
     property bool gameStarted: false
     property int score: 0
+    property int playerHitpoints: 3
     property variant playerProjectiles: []
     property variant enemies: []
     property real enemySpeed: 0.01
@@ -50,6 +51,9 @@ Window {
             enemies.splice(i, 1)
             enemy.destroy()
         }
+
+        score = 0
+        playerHitpoints = 3
 
         // initialize
         player.x = (gameboard.width - player.width) / 2
@@ -113,7 +117,7 @@ Window {
                     for (let enemyIt = 0; enemyIt < enemies.length; enemyIt++) {
                         let enemy = enemies[enemyIt]
                         if (intersecting(projRect, Qt.rect(enemy.x, enemy.y, enemy.width, enemy.height))) {
-                            enemy.hit(function(){ enemies.splice(enemyIt, 1); sounds.playRandomExplosion() })
+                            enemy.hit(function(){ enemies.splice(enemyIt, 1); sounds.playRandomExplosion(); score += 25 })
                             playerProjectiles.splice(i, 1)
                             proj.destroy()
                             collision = true
@@ -162,16 +166,24 @@ Window {
                     enemy.y += Math.abs(movementLength)
                 }
             }
+
+            if (enemies.length == 0) {
+                console.log("Victory!")
+                gameStarted = !gameStarted
+                startGameButton.focus = true
+            }
         }
     }
 
     Rectangle {
         id: statusbar
-        height: 32
+        height: scoreText.height
         width: parent.width
         Row {
             Text {
+                id: scoreText
                 text: qsTr("Score: " + score)
+                font.pointSize: 32
             }
         }
     }
@@ -206,7 +218,9 @@ Window {
         }
     }
 
+    // TODO: turn this into something that isn't a button
     Button {
+        id: startGameButton
         visible: !gameStarted
         text: qsTr("Start game")
         anchors.centerIn: gameboard
