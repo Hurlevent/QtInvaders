@@ -51,8 +51,6 @@ Window {
             enemy.destroy()
         }
 
-        // TODO
-
         // initialize
         player.x = (gameboard.width - player.width) / 2
         player.y = gameboard.height - player.height
@@ -145,25 +143,24 @@ Window {
                 if (distance > 0){
                     return furthestNextPos < gameboard.width
                 } else if (distance < 0){
-                    return furthestNextPos >= gameboard.width
+                    return furthestNextPos >= 0
                 }
                 return true
             }
 
             let movementLength = enemySpeed * gameboard.width
 
-            console.log("movementLen: " + movementLength)
-
             if (canMove(movementLength)) {
                 for(let enemyIt = 0; enemyIt < enemies.length; enemyIt++){
                     let enemy = enemies[enemyIt]
-                    //let movementLength = enemy.width + (enemySpacing * gameboard.width / 2)
-
                     enemy.x = enemy.x + movementLength
                 }
             } else {
                 enemySpeed = -enemySpeed
-                //console.log("enemySpeed now: " + enemySpeed)
+                for(let enemyIt = 0; enemyIt < enemies.length; enemyIt++){
+                    let enemy = enemies[enemyIt]
+                    enemy.y += Math.abs(movementLength)
+                }
             }
         }
     }
