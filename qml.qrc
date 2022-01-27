@@ -34,5 +34,6 @@
         <file>images/player.png</file>
         <file>images/UFO.png</file>
         <file>images/stars.png</file>
+        <file>qml/PlayerProjectile.qml</file>
     </qresource>
 </RCC>

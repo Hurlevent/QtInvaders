@@ -1,4 +1,4 @@
-function init() {
+function init(view) {
     let engine = (function(){
         var _playerProjectiles = [];
         var _enemies = [];
@@ -13,7 +13,8 @@ function init() {
 
         }
 
+        function setView(){
 
-
+        }
     })
 }
