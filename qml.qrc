@@ -1,21 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>nebula/nebula01.png</file>
-        <file>nebula/nebula02.png</file>
-        <file>nebula/nebula03.png</file>
-        <file>nebula/nebula04.png</file>
-        <file>nebula/nebula05.png</file>
-        <file>nebula/nebula06.png</file>
-        <file>nebula/nebula07.png</file>
-        <file>nebula/nebula09.png</file>
-        <file>nebula/nebula10.png</file>
-        <file>nebula/stars.png</file>
-        <file>heart.png</file>
-        <file>heart.svg</file>
-        <file>Missile.svg</file>
-        <file>GameView.qml</file>
-        <file>UFOEnemy.qml</file>
         <file>sounds/explosion1.wav</file>
         <file>sounds/explosion2.wav</file>
         <file>sounds/explosion3.wav</file>
@@ -37,11 +21,18 @@
         <file>sounds/ufo1.wav</file>
         <file>sounds/ufo2.wav</file>
         <file>sounds/ufo3.wav</file>
-        <file>UFO.png</file>
-        <file>Player.qml</file>
-        <file>Input.qml</file>
-        <file>Spaceship_01_BLUE.png</file>
-        <file>Flame_01.png</file>
-        <file>Flame_02.png</file>
+        <file>qml/gameEngine.js</file>
+        <file>qml/GameView.qml</file>
+        <file>qml/Input.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/Player.qml</file>
+        <file>qml/UFOEnemy.qml</file>
+        <file>images/Flame_01.png</file>
+        <file>images/Flame_02.png</file>
+        <file>images/heart.png</file>
+        <file>images/heart.svg</file>
+        <file>images/player.png</file>
+        <file>images/UFO.png</file>
+        <file>images/stars.png</file>
     </qresource>
 </RCC>
