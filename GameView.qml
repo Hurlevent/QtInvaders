@@ -1,20 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 
-import QtInvaders
-import QtInvaders.Input
-
 Rectangle {
     id: statusbar
-
-    function tick(delta) {
-        let newPlayerPosition = player.position + Input.pollVector() * player.movementSpeed * delta
-        console.log(newPlayerPosition)
-        console.log(player.width)
-        console.log(player.height)
-        console.log(player.implicitWidth)
-        console.log(player.implicitHeight)
-    }
 
     width: parent.width
     height: parent.height * 0.1
@@ -53,7 +41,4 @@ Rectangle {
 //        }
     }
 
-    Player {
-        id: player
-    }
 }

@@ -15,14 +15,7 @@ int main(int argc, char *argv[])
 #endif
 
     QGuiApplication app(argc, argv);
-
     QQmlApplicationEngine engine;
-
-    QScopedPointer inputManager(new InputSystem);
-    qmlRegisterSingletonInstance("QtInvaders.Input", 1, 0, "Input", inputManager.get());
-    qmlRegisterType<Player>("QtInvaders", 1, 0, "Player");
-    //qmlRegisterType<GameBoard>("QtInvaders", 1, 0, "GameBoard");
-
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

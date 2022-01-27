@@ -9,6 +9,7 @@ bool InputSystem::event(QEvent *e){
     if(e->type() == QEvent::KeyPress) {
         auto keyPressEvent = static_cast<QKeyEvent*>(e);
         switch (keyPressEvent->key()) {
+        qDebug() << "pressedKey: " << keyPressEvent->key();
         case Qt::Key_Right:
             m_rightDown = true;
             m_leftDown = false;

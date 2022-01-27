@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Window
 import QtQuick.Layouts
-import QtInvaders
 
 Window {
     width: 640
@@ -9,29 +8,52 @@ Window {
     visible: true
     title: qsTr("Qt Invaders")
 
-    property real lastCurrentTime: 0
-    property int currentViewIdx: 0;
-    property variant views: [gameView]
+    property int score: 0
+
+    Input {
+        id: input
+    }
 
     Timer {
         id: gameTimer
+        interval: 16
+        repeat: true
+        running: true
         onTriggered: function(){
-            let currentTime = new Date().getTime()
-            let delta = currentTime - lastCurrentTime
-
-            views[currentViewIdx].tick(delta)
-        }
-        Component.onCompleted: function () {
-            lastCurrentTime = new Date().getTime()
+            player.update(input, gameboard.size)
         }
     }
 
     Rectangle {
-        anchors.fill: parent
+        id: statusbar
+        height: 32
+        width: parent.width
+        Row {
+            Text {
+                text: qsTr("Score: " + score)
+            }
+        }
+    }
 
-        GameView {
-            id: gameView
-            anchors.fill: parent
+    Image {
+        id: gameboard
+        anchors {
+            top: statusbar.bottom
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        focus: true
+        fillMode: Image.PreserveAspectCrop
+        source: "qrc:nebula/stars.png"
+
+        readonly property vector2d size: Qt.vector2d(gameboard.width, gameboard.height)
+
+        Keys.onPressed: function (event) { input.handlePress(event) }
+        Keys.onReleased: function (event) { input.handleRelease(event) }
+
+        Player {
+            id: player
             visible: true
         }
     }
