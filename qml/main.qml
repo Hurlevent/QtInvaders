@@ -11,11 +11,15 @@ Window {
 
     readonly property int enemyPerRow: 5
     readonly property int numberOfEnemyRows: 3
+    readonly property real enemyMargin: 0.2
+    readonly property real enemySpacing: 0.01
+
 
     property bool gameStarted: false
     property int score: 0
     property variant playerProjectiles: []
     property variant enemies: []
+    property bool enemiesMovingRight: true
 
     function intersecting(rect1, rect2) {
         return (rect1.x < rect2.x + rect2.width &&
@@ -55,21 +59,18 @@ Window {
 
         gameStarted = true
 
-        // fraction of the gameboard
-        let spacing = 0.01
-        let margin = 0.2
-
-        let boardWithoutMargin = (1 - margin) * gameboard.width
-        let totalSpacing = ((spacing * boardWithoutMargin) * (enemyPerRow - 1))
+        let boardWithoutMargin = (1 - enemyMargin) * gameboard.width
+        let totalSpacing = ((enemySpacing * boardWithoutMargin) * (enemyPerRow - 1))
         let enemyWidth = (boardWithoutMargin - totalSpacing) / enemyPerRow
 
         for (let row = 0; row < numberOfEnemyRows; row++) {
             for (let column = 0; column < enemyPerRow; column++){
-                let posX = ((margin / 2) * gameboard.width) + column * (enemyWidth + (spacing * gameboard.width / 2))
-                let posY = ((margin / 2) * gameboard.height) + row * (enemyWidth + (spacing * gameboard.height / 2))
+                let posX = ((enemyMargin / 2) * gameboard.width) + column * (enemyWidth + (enemySpacing * gameboard.width / 2))
+                let posY = ((enemyMargin / 2) * gameboard.height) + row * (enemyWidth + (enemySpacing * gameboard.height / 2))
                 let enemyObj = spawn("UFOEnemy.qml", {x: posX, y: posY})
                 enemyObj.width = enemyWidth
                 enemyObj.height = enemyWidth
+                enemyObj.row = row
                 if (enemyObj !== null)
                     enemies.push(enemyObj)
                 else
@@ -109,22 +110,18 @@ Window {
                 else {
                     // check collision with enemies
 
+                    let collision = false
                     let projRect = Qt.rect(proj.x, proj.y, proj.width, proj.height)
-                    for (let enemy in enemies) {
-                        console.log("intersect? x: " + enemy.x + " y: " + enemy.y + " w: " + enemy.width + " h: " + enemy.height)
+                    for (let enemyIt = 0; enemyIt < enemies.length; enemyIt++) {
+                        let enemy = enemies[enemyIt]
                         if (intersecting(projRect, Qt.rect(enemy.x, enemy.y, enemy.width, enemy.height))) {
+                            enemy.hit(function(){ enemies.splice(enemyIt, 1); sounds.playRandomExplosion() })
                             playerProjectiles.splice(i, 1)
                             proj.destroy()
-                            console.log("hit enemy: " + enemy)
-                            //enemy.destroy()
+                            collision = true
                         }
                     }
-
-                    let collision = false
-
-                    if (collision) {
-
-                    } else {
+                    if (!collision) {
                         proj.y = newY
                         i++
                     }
@@ -132,6 +129,32 @@ Window {
             }
 
             // update enemy movement
+
+            var canMove = function(right){
+                let furthestNextPos = gameboard.width / 2
+                for(let enemyIt = 0; enemyIt < enemies.length; enemyIt++){
+                    let enemy = enemies[enemyIt]
+                    let movementLength = enemy.width + (enemySpacing * gameboard.width / 2)
+
+                    if((right && enemy.x + movementLength > furthestNextPos) || (!right && enemy.x - movementLength < furthestNextPos)) {
+                        furthestNextPos = right ? enemy.x + movementLength : enemy.x - movementLength
+                    }
+                }
+
+                return right ? furthestNextPos < gameboard.width : furthestNextPos >= gameboard.width
+            }
+
+
+            if (canMove(enemiesMovingRight)){
+                for(let enemyIt = 0; enemyIt < enemies.length; enemyIt++){
+                    let enemy = enemies[enemyIt]
+                    let movementLength = enemy.width + (enemySpacing * gameboard.width / 2)
+
+                    enemy.x = enemiesMovingRight ? enemy.x + movementLength : enemy.x - movementLength
+                }
+            } else {
+                enemiesMovingRight = !enemiesMovingRight
+            }
         }
     }
 

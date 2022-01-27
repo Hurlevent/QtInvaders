@@ -8,7 +8,7 @@ Image {
     source: "qrc:images/player.png"
 
     property string objectType: "player"
-    property real movementSpeed: 3
+    property real movementSpeed: 1
     property bool canShoot: true
 
     signal shootLaser()
