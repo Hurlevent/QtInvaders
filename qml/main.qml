@@ -85,6 +85,8 @@ Window {
                     console.log("failed to create enemies")
             }
         }
+        sounds.playLevelStartSound()
+        musicTimer.start()
     }
 
     SoundEffects {
@@ -93,6 +95,15 @@ Window {
 
     Input {
         id: input
+    }
+
+    Timer {
+        id: musicTimer
+        interval: 1000
+        repeat: true
+        onTriggered: function(){
+            sounds.playMusicFurther()
+        }
     }
 
     Timer {
@@ -183,6 +194,7 @@ Window {
                             sounds.playRandomHit()
                             player.invincibilityCounter = 60
                             if(playerHitpoints <= 0) {
+                                musicTimer.stop()
                                 sounds.playRandomGameover()
                                 console.log("Game over!")
                                 gameStarted = !gameStarted
@@ -202,6 +214,8 @@ Window {
             }
 
             if (enemies.length == 0) {
+                musicTimer.stop()
+                sounds.playLevelEndSound()
                 console.log("Victory!")
                 gameStarted = !gameStarted
                 menuTextThingy.focus = true
