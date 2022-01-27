@@ -120,6 +120,7 @@ Window {
                             enemy.hit(function(){ enemies.splice(enemyIt, 1); sounds.playRandomExplosion(); score += 25 })
                             playerProjectiles.splice(i, 1)
                             proj.destroy()
+                            sounds.playRandomHit()
                             collision = true
                         }
                     }
@@ -158,8 +159,29 @@ Window {
                 for(let enemyIt = 0; enemyIt < enemies.length; enemyIt++){
                     let enemy = enemies[enemyIt]
                     enemy.x = enemy.x + movementLength
+
+                    // check if they collide with player
+
+                    let playerRect = Qt.rect(player.x, player.y, player.width, player.height)
+                    let enemyRect = Qt.rect(enemy.x, enemy.y, enemy.width, enemy.height)
+                    if (intersecting(player, enemyRect)) {
+
+                        if (player.invincibilityCounter == 0) {
+                            playerHitpoints--;
+                            sounds.playRandomHit()
+                            player.invincibilityCounter = 60
+                            if(playerHitpoints <= 0) {
+                                sounds.playRandomGameover()
+                                console.log("Game over!")
+                                gameStarted = !gameStarted
+                                startGameButton.focus = true
+                            }
+                        }
+                    }
                 }
             } else {
+
+                // Move downwards
                 enemySpeed = -enemySpeed
                 for(let enemyIt = 0; enemyIt < enemies.length; enemyIt++){
                     let enemy = enemies[enemyIt]
@@ -172,6 +194,8 @@ Window {
                 gameStarted = !gameStarted
                 startGameButton.focus = true
             }
+
+            player.invincibilityCounter = Math.max(0, player.invincibilityCounter - 1)
         }
     }
 
@@ -179,11 +203,24 @@ Window {
         id: statusbar
         height: scoreText.height
         width: parent.width
+
+        Text {
+            anchors.left: statusbar.left
+            id: scoreText
+            text: qsTr("Score: " + score)
+            font.pointSize: 32
+        }
+
         Row {
-            Text {
-                id: scoreText
-                text: qsTr("Score: " + score)
-                font.pointSize: 32
+            anchors.right: statusbar.right
+            spacing: 30
+            Repeater {
+                model: Math.max(0, Math.min(playerHitpoints, 3))
+                delegate: Image {
+                    fillMode: Image.PreserveAspectFit
+                    source: "qrc:images/heart.svg"
+                    height: statusbar.height
+                }
             }
         }
     }

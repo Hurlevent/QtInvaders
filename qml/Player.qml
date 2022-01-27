@@ -11,6 +11,8 @@ Image {
     property real movementSpeed: 1
     property bool canShoot: true
 
+    property int invincibilityCounter: 60
+
     signal shootLaser()
 
     function update(input, board){
