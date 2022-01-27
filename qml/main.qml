@@ -14,11 +14,11 @@ Window {
     readonly property real enemyMargin: 0.2
     readonly property real enemySpacing: 0.01
 
-
     property bool gameStarted: false
     property int score: 0
     property int playerHitpoints: 3
     property variant playerProjectiles: []
+    property variant enemyProjectiles: []
     property variant enemies: []
     property real enemySpeed: 0.01
 
@@ -50,6 +50,11 @@ Window {
             enemies[i].destroy()
         }
         enemies = []
+
+        for(let i = 0; i < enemyProjectiles.length; i++){
+            enemyProjectiles[i].destroy()
+        }
+        enemyProjectiles = []
 
         input.clearAll()
 
@@ -132,6 +137,12 @@ Window {
                 }
             }
 
+            // enemy projectile movement
+            i = 0
+            while (i < enemyProjectiles.length) {
+
+            }
+
             // update enemy movement
 
             var canMove = function(distance){
@@ -175,7 +186,6 @@ Window {
                                 sounds.playRandomGameover()
                                 console.log("Game over!")
                                 gameStarted = !gameStarted
-                                //startGameButton.focus = true
                                 menuTextThingy.focus = true
                                 menuTextThingy.text = qsTr("Game Over!")
                             }
@@ -183,7 +193,6 @@ Window {
                     }
                 }
             } else {
-
                 // Move downwards
                 enemySpeed = -enemySpeed
                 for(let enemyIt = 0; enemyIt < enemies.length; enemyIt++){
@@ -195,7 +204,6 @@ Window {
             if (enemies.length == 0) {
                 console.log("Victory!")
                 gameStarted = !gameStarted
-                //startGameButton.focus = true
                 menuTextThingy.focus = true
                 menuTextThingy.text = qsTr("Victory!")
             }

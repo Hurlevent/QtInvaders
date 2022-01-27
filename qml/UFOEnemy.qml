@@ -6,6 +6,8 @@ Image {
     property int row: -1
     property int hitPoints: 3
 
+    property int laserCooldown: 180
+
     fillMode: Image.PreserveAspectFit
     source: "qrc:images/UFO.png"
 
@@ -17,5 +19,9 @@ Image {
 
             root.destroy()
         }
+    }
+
+    function tryShoot(){
+        laserCooldown
     }
 }
