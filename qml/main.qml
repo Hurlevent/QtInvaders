@@ -47,10 +47,11 @@ Window {
         // clean up
 
         for(let i = 0; i < enemies.length; i++){
-            let enemy = enemies[i]
-            enemies.splice(i, 1)
-            enemy.destroy()
+            enemies[i].destroy()
         }
+        enemies = []
+
+        input.clearAll()
 
         score = 0
         playerHitpoints = 3
@@ -174,7 +175,9 @@ Window {
                                 sounds.playRandomGameover()
                                 console.log("Game over!")
                                 gameStarted = !gameStarted
-                                startGameButton.focus = true
+                                //startGameButton.focus = true
+                                menuTextThingy.focus = true
+                                menuTextThingy.text = qsTr("Game Over!")
                             }
                         }
                     }
@@ -192,7 +195,9 @@ Window {
             if (enemies.length == 0) {
                 console.log("Victory!")
                 gameStarted = !gameStarted
-                startGameButton.focus = true
+                //startGameButton.focus = true
+                menuTextThingy.focus = true
+                menuTextThingy.text = qsTr("Victory!")
             }
 
             player.invincibilityCounter = Math.max(0, player.invincibilityCounter - 1)
@@ -255,14 +260,28 @@ Window {
         }
     }
 
-    // TODO: turn this into something that isn't a button
-    Button {
-        id: startGameButton
-        visible: !gameStarted
-        text: qsTr("Start game")
+    Column {
         anchors.centerIn: gameboard
-        focus: true
 
-        onClicked: restartGame()
+        Label {
+            id: menuTextThingy
+            focus: true
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("Welcome to Qt Invaders!")
+            visible: !gameStarted
+            color: "#FFFFFF"
+            font.pointSize: 36
+            Keys.onPressed: function(event) { if(event.key === Qt.Key_Return){ restartGame() }}
+        }
+
+        spacing: 32
+
+        Text {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("Press <Return> to start")
+            visible: !gameStarted
+            color: "#FFFFFF"
+            font.pointSize: 36
+        }
     }
 }

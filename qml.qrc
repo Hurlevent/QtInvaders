@@ -27,8 +27,6 @@
         <file>sounds/ufo1.wav</file>
         <file>sounds/ufo2.wav</file>
         <file>sounds/ufo3.wav</file>
-        <file>qml/gameEngine.js</file>
-        <file>qml/GameView.qml</file>
         <file>qml/Input.qml</file>
         <file>qml/main.qml</file>
         <file>qml/Player.qml</file>

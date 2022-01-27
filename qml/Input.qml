@@ -76,4 +76,12 @@ QtObject {
 
         return Qt.vector2d(x / length, y / length)
     }
+
+    function clearAll(){
+        data.moveLeft = false
+        data.moveRight = false
+        data.moveForward = false
+        data.moveBackward = false
+        data.spacebarDown = false
+    }
 }
