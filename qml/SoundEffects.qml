@@ -22,6 +22,17 @@ Item {
         let clips = [ufo1, ufo2]
         clips[Math.floor(Math.random() * clips.length)].play();
     }
+    function playLevelStartSound(){
+        levelStart.play();
+    }
+    function playLevelEndSound(){
+        levelEnd.play();
+    }
+    property variant notes: [music1, music2, music3, music4];
+    function playMusicFurther(){
+        notes[0].play();
+        notes.push(notes.shift());
+    }
 
     SoundEffect {
         id: explosion1
@@ -70,6 +81,30 @@ Item {
     SoundEffect {
         id: hit4
         source: "qrc:/sounds/hit4.wav"
+    }
+    SoundEffect {
+        id: levelEnd
+        source: "qrc:/sounds/level-end.wav"
+    }
+    SoundEffect {
+        id: levelStart
+        source: "qrc:/sounds/level-start.wav"
+    }
+    SoundEffect {
+        id: music1
+        source: "qrc:/sounds/note-g.wav"
+    }
+    SoundEffect {
+        id: music2
+        source: "qrc:/sounds/note-f-sharp.wav"
+    }
+    SoundEffect {
+        id: music3
+        source: "qrc:/sounds/note-f.wav"
+    }
+    SoundEffect {
+        id: music4
+        source: "qrc:/sounds/note-e.wav"
     }
     SoundEffect {
         id: shoot1
