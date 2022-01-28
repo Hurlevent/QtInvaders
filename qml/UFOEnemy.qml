@@ -1,38 +1,55 @@
 import QtQuick
 
-Image {
+Item {
     id: root
 
     property int row: -1
     property int hitPoints: 3
-
     property int laserCooldown: 120
 
-    fillMode: Image.PreserveAspectFit
-    source: "qrc:images/UFO.png"
+    Image {
+        id: sprite
+        anchors.fill: parent
+        fillMode: Image.PreserveAspectFit
+        source: "qrc:images/UFO.png"
+    }
 
     function hit(callbackOnDeath) {
-        hitPoints--
-        if (hitPoints <= 0){
+        root.hitPoints--
+        if (root.hitPoints <= 0){
             callbackOnDeath()
-            // TODO: Play animation
-
-            root.destroy()
+            deathAnimation.start()
+            sprite.visible = false
         }
     }
 
     function tryShoot(){
-        if (row !== 0)
+        if (root.row !== 0)
             return false
 
-        laserCooldown = Math.max(0, laserCooldown - 1)
+        root.laserCooldown = Math.max(0, root.laserCooldown - 1)
 
-        if (laserCooldown === 0) {
-            laserCooldown = Math.max(60, Math.floor(Math.random() * 180))
+        if (root.laserCooldown === 0) {
+            root.laserCooldown = Math.max(60, Math.floor(Math.random() * 180))
 
             return true
         }
 
         return false
+    }
+
+    AnimatedSprite {
+        id: deathAnimation
+        source: "qrc:/images/explosions.png"
+        anchors.centerIn: parent
+        frameWidth: 64
+        frameHeight: 64
+        frameCount: 16
+        frameDuration: 50
+        finishBehavior: AnimatedSprite.FinishAtFinalFrame
+        running: false
+        loops: 1
+        visible: running
+        onFinished: function () { deathAnimation.stop(); root.destroy() }
     }
 }

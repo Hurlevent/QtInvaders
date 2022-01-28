@@ -41,5 +41,6 @@
         <file>qml/PlayerProjectile.qml</file>
         <file>qml/SoundEffects.qml</file>
         <file>qml/EnemyProjectile.qml</file>
+        <file>images/explosions.png</file>
     </qresource>
 </RCC>
