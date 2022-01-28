@@ -46,15 +46,20 @@ Window {
     function restartGame(){
         // clean up
 
-        for(let i = 0; i < enemies.length; i++){
+        for (let i = 0; i < enemies.length; i++){
             enemies[i].destroy()
         }
         enemies = []
 
-        for(let i = 0; i < enemyProjectiles.length; i++){
+        for (let i = 0; i < enemyProjectiles.length; i++){
             enemyProjectiles[i].destroy()
         }
         enemyProjectiles = []
+
+        for (let i = 0; i < playerProjectiles.length; i++) {
+            playerProjectiles[i].destroy()
+        }
+        playerProjectiles = []
 
         input.clearAll()
 
