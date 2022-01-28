@@ -244,7 +244,7 @@ Window {
                     if (enemy.tryShoot()){
                         let projObj = spawn("EnemyProjectile.qml", {x: enemy.x + (enemy.width / 2), y: enemy.y + enemy.height})
                         if (projObj !== null) {
-                            sounds.playRandomShoot()
+                            sounds.playEnemyShoot()
                             enemyProjectiles.push(projObj)
                         }
                     }

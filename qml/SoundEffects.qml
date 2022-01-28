@@ -3,11 +3,11 @@ import QtMultimedia
 
 Item {
     function playRandomExplosion(){
-        let clips = [explosion1, explosion2, explosion3, explosion4, explosion5, explosion6]
+        let clips = [explosion1, explosion2, explosion3, explosion4, explosion6]
         clips[Math.floor(Math.random() * clips.length)].play();
     }
     function playRandomHit(){
-        let clips = [hit1, hit2, hit3, hit4]
+        let clips = [hit1, hit3, hit4]
         clips[Math.floor(Math.random() * clips.length)].play();
     }
     function playRandomGameover(){
@@ -15,8 +15,11 @@ Item {
         clips[Math.floor(Math.random() * clips.length)].play();
     }
     function playRandomShoot(){
-        let clips = [shoot1, shoot2, shoot3, shoot4, shoot5, shoot6]
+        let clips = [shoot1, shoot3, shoot4, shoot6]
         clips[Math.floor(Math.random() * clips.length)].play();
+    }
+    function playEnemyShoot(){
+        shoot5.play();
     }
     function playRandomUfo(){
         let clips = [ufo1, ufo2]
@@ -69,18 +72,22 @@ Item {
     SoundEffect {
         id: hit1
         source: "qrc:/sounds/hit1.wav"
+        volume: 0.25
     }
     SoundEffect {
         id: hit2
         source: "qrc:/sounds/hit2.wav"
+        volume: 0.25
     }
     SoundEffect {
         id: hit3
         source: "qrc:/sounds/hit3.wav"
+        volume: 0.25
     }
     SoundEffect {
         id: hit4
         source: "qrc:/sounds/hit4.wav"
+        volume: 0.25
     }
     SoundEffect {
         id: levelEnd
