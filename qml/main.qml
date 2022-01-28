@@ -31,8 +31,8 @@ Window {
 
     function spawn(compStr, properties)
     {
-        let component = Qt.createComponent(compStr);
-        let object = component.createObject(gameboard, properties)
+        var component = Qt.createComponent(compStr);
+        var object = component.createObject(gameboard, properties)
 
         if(object) {
             return object
@@ -56,7 +56,8 @@ Window {
         }
         enemyProjectiles = []
 
-        for (let i = 0; i < playerProjectiles.length; i++) {
+        for(let i = 0; i < playerProjectiles.length; i++)
+        {
             playerProjectiles[i].destroy()
         }
         playerProjectiles = []
@@ -80,7 +81,7 @@ Window {
             for (let column = 0; column < enemyPerRow; column++){
                 let posX = ((enemyMargin / 2) * gameboard.width) + column * (enemyWidth + (enemySpacing * gameboard.width / 2))
                 let posY = ((enemyMargin / 2) * gameboard.height) + row * (enemyWidth + (enemySpacing * gameboard.height / 2))
-                let enemyObj = spawn("UFOEnemy.qml", {x: posX, y: posY})
+                var enemyObj = spawn("UFOEnemy.qml", {x: posX, y: posY})
                 enemyObj.width = enemyWidth
                 enemyObj.height = enemyWidth
                 enemyObj.row = numberOfEnemyRows - (row + 1)
@@ -144,8 +145,8 @@ Window {
             let i = 0;
             // PlayerProjectile logic
             while (i < playerProjectiles.length) {
-                let proj = playerProjectiles[i]
-                let newY = proj.y - proj.speed / 100 * gameboard.size.y
+                var proj = playerProjectiles[i]
+                var newY = proj.y - proj.speed / 100 * gameboard.size.y
                 if (newY < 0) {
                     playerProjectiles.splice(i, 1)
                     proj.destroy()
@@ -157,13 +158,14 @@ Window {
                     let collision = false
                     const projRect = Qt.rect(proj.x, proj.y, proj.width, proj.height)
                     for (let enemyIt = 0; enemyIt < enemies.length; enemyIt++) {
-                        let enemy = enemies[enemyIt]
+                        var enemy = enemies[enemyIt]
                         if (intersecting(projRect, Qt.rect(enemy.x, enemy.y, enemy.width, enemy.height))) {
                             enemy.hit(function(){ enemies.splice(enemyIt, 1); sounds.playRandomExplosion(); score += 25 })
                             playerProjectiles.splice(i, 1)
                             proj.destroy()
                             sounds.playRandomHit()
                             collision = true
+                            break;
                         }
                     }
                     if (!collision) {
@@ -176,7 +178,7 @@ Window {
             // enemy projectile movement
             i = 0
             while (i < enemyProjectiles.length) {
-                let proj = enemyProjectiles[i]
+                var proj = enemyProjectiles[i]
 
                 const newY = proj.y + proj.speed / 100 * gameboard.size.y
                 if (newY >= gameboard.height) {
@@ -317,7 +319,7 @@ Window {
             visible: gameStarted
 
             onShootLaser: function() {
-                let obj = spawn("PlayerProjectile.qml", {x: player.x + (player.width / 2), y: player.y})
+                var obj = spawn("PlayerProjectile.qml", {x: player.x + (player.width / 2), y: player.y})
                 sounds.playRandomShoot()
                 if (obj !== null)
                     playerProjectiles.push(obj)
