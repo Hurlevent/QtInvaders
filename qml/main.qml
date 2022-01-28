@@ -86,6 +86,7 @@ Window {
             }
         }
         sounds.playLevelStartSound()
+        musicTimer.interval = musicTimer.defaultInterval
         musicTimer.start()
     }
 
@@ -115,9 +116,11 @@ Window {
 
     Timer {
         id: musicTimer
-        interval: 1000
+        readonly property int defaultInterval: 2250
+        interval: defaultInterval
         repeat: true
         onTriggered: function(){
+            interval = interval > 1000 ? 1000 : Math.max(interval - 20, 180)
             sounds.playMusicFurther()
         }
     }
