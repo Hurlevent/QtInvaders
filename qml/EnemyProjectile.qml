@@ -6,5 +6,5 @@ Rectangle {
     width: 5
     height: 15
 
-    property int speed: 2
+    property real speed: 1.2
 }

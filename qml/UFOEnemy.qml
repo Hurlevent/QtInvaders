@@ -6,7 +6,7 @@ Image {
     property int row: -1
     property int hitPoints: 3
 
-    property int laserCooldown: 180
+    property int laserCooldown: 120
 
     fillMode: Image.PreserveAspectFit
     source: "qrc:images/UFO.png"
@@ -22,6 +22,17 @@ Image {
     }
 
     function tryShoot(){
-        laserCooldown
+        if (row !== 0)
+            return false
+
+        laserCooldown = Math.max(0, laserCooldown - 1)
+
+        if (laserCooldown === 0) {
+            laserCooldown = Math.max(60, Math.floor(Math.random() * 180))
+
+            return true
+        }
+
+        return false
     }
 }

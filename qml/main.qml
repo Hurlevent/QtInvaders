@@ -78,7 +78,7 @@ Window {
                 let enemyObj = spawn("UFOEnemy.qml", {x: posX, y: posY})
                 enemyObj.width = enemyWidth
                 enemyObj.height = enemyWidth
-                enemyObj.row = row
+                enemyObj.row = numberOfEnemyRows - (row + 1)
                 if (enemyObj !== null)
                     enemies.push(enemyObj)
                 else
@@ -87,6 +87,22 @@ Window {
         }
         sounds.playLevelStartSound()
         musicTimer.start()
+    }
+
+    function takePlayerDamage(){
+        if (player.invincibilityCounter == 0) {
+            playerHitpoints--;
+            sounds.playRandomHit()
+            player.invincibilityCounter = 60
+            if(playerHitpoints <= 0) {
+                musicTimer.stop()
+                sounds.playRandomGameover()
+                console.log("Game over!")
+                gameStarted = !gameStarted
+                menuTextThingy.focus = true
+                menuTextThingy.text = qsTr("Game Over!")
+            }
+        }
     }
 
     SoundEffects {
@@ -125,12 +141,13 @@ Window {
                 if (newY < 0) {
                     playerProjectiles.splice(i, 1)
                     proj.destroy()
+                    continue;
                 }
                 else {
                     // check collision with enemies
 
                     let collision = false
-                    let projRect = Qt.rect(proj.x, proj.y, proj.width, proj.height)
+                    const projRect = Qt.rect(proj.x, proj.y, proj.width, proj.height)
                     for (let enemyIt = 0; enemyIt < enemies.length; enemyIt++) {
                         let enemy = enemies[enemyIt]
                         if (intersecting(projRect, Qt.rect(enemy.x, enemy.y, enemy.width, enemy.height))) {
@@ -151,7 +168,29 @@ Window {
             // enemy projectile movement
             i = 0
             while (i < enemyProjectiles.length) {
+                let proj = enemyProjectiles[i]
 
+                const newY = proj.y + proj.speed / 100 * gameboard.size.y
+                if (newY >= gameboard.height) {
+                    enemyProjectiles.splice(i, 1)
+                    proj.destroy()
+                    continue
+                } else {
+                    let collision = false
+
+                    const projRect = Qt.rect(proj.x, proj.y, proj.width, proj.height)
+                    if (intersecting(projRect, playerRect)) {
+                        takePlayerDamage()
+                        enemyProjectiles.splice(i, 1)
+                        proj.destroy()
+                        collision = true
+                    }
+
+                    if (!collision) {
+                        proj.y = newY
+                        i++
+                    }
+                }
             }
 
             // update enemy movement
@@ -188,19 +227,15 @@ Window {
                     let playerRect = Qt.rect(player.x, player.y, player.width, player.height)
                     let enemyRect = Qt.rect(enemy.x, enemy.y, enemy.width, enemy.height)
                     if (intersecting(player, enemyRect)) {
+                        takePlayerDamage()
+                    }
 
-                        if (player.invincibilityCounter == 0) {
-                            playerHitpoints--;
-                            sounds.playRandomHit()
-                            player.invincibilityCounter = 60
-                            if(playerHitpoints <= 0) {
-                                musicTimer.stop()
-                                sounds.playRandomGameover()
-                                console.log("Game over!")
-                                gameStarted = !gameStarted
-                                menuTextThingy.focus = true
-                                menuTextThingy.text = qsTr("Game Over!")
-                            }
+                    // shoot?
+                    if (enemy.tryShoot()){
+                        let projObj = spawn("EnemyProjectile.qml", {x: enemy.x + (enemy.width / 2), y: enemy.y + enemy.height})
+                        if (projObj !== null) {
+                            sounds.playRandomShoot()
+                            enemyProjectiles.push(projObj)
                         }
                     }
                 }
